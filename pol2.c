@@ -54,6 +54,7 @@ void lcdcmd(char cmd)
 }
 void main()
 {
+	PRR |= (unsigned char)((1 << PRSPI)|(1 << PRTIM2)|(1 << PRTIM0)|(1 << PRADC)|(1 << PRTWI));
 	DDRB |= 0x07;
 	DDRD |= 0xF0;
 	DDRD &= ~(1 << PD2);
@@ -82,7 +83,7 @@ void main()
 	EICRA |= (1 << ISC11);
 	EIMSK |= (1 << INT0)|(1 << INT1);
 	TCCR1B |= 1 << WGM12;	//Setting up CTC mode
-	OCR1A = 3125; // Setting timer ticks
+	OCR1A = 3124; // Setting timer ticks
 	TCNT1 = 0;
 	sei();	//Enable global interrupt
 
